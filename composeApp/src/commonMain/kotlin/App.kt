@@ -26,23 +26,32 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
+    val greeting = remember { Greeting().greet() }
+
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
-        val greeting = remember { Greeting().greet() }
+        var userName by remember { mutableStateOf("")}
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            var value by remember { mutableStateOf("Hey") }
 
+            var value by remember { mutableStateOf("Hey") }
             TextField(
                 value = value,
                 onValueChange = { value = it },
-                label = { Text("Enter Your User Name") },
+                label = {Text("Enter Your User Name") },
                 maxLines = 2,
                 textStyle = TextStyle(color = Color.Blue, fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(20.dp)
             )
-            Button(onClick = { showContent = !showContent }) {
+
+            Button(onClick = {userName = value}) {
                 Text("Click to Log in!")
             }
+
+            Text(userName)
+
+
+
         }
     }
 }
+
